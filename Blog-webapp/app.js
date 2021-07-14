@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 // connect to mongo DB
-mongoose.connect("mongodb+srv://admin-kayla:Test123@cluster0.ktb52.mongodb.net/blogDB", {useUnifiedTopology: true,
+mongoose.connect("mongodb+srv://admin-kayla:test123@cluster0.ktb52.mongodb.net/blogDB", {useUnifiedTopology: true,
 useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false });
 
 
