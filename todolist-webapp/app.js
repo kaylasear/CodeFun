@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 // connect to mongo cloud server, get rid of deprecated warnings
-mongoose.connect("mongodb+srv://admin-kayla:Test123@cluster0.ktb52.mongodb.net/todolistDB", {useUnifiedTopology: true,
+mongoose.connect("mongodb+srv://admin-kayla:test123@cluster0.ktb52.mongodb.net/todolistDB", {useUnifiedTopology: true,
 useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false });
 
 // create a schemea
