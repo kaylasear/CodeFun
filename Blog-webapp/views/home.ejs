@@ -1,10 +1,11 @@
 
+
 <%- include("partials/header"); -%>
-    <h1>Home</h1>
+    <!-- <h1>Home</h1>
     <p> <%= startingContent %> </p>
+ -->
 
-
-  <%  posts.forEach(function(post){ %>
+  <!-- <%  posts.forEach(function(post){ %>
 
     <h1><%=post.title%></h1>
     <p>
@@ -13,7 +14,47 @@
     </p>
 
 
-    <% }) %>
+    <% }) %> -->
 
+
+
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <img src="https://www.moneycrashers.com/wp-content/uploads/2018/10/travel-world-map-1068x713.jpg" class="img-fluid" alt="Travel Pic">
+          <div class="carousel-caption d-none d-md-block ">
+            <h1>Home</h1>
+            <p id="content"> <%= startingContent %></p>
+          </div>
+        </div>
+
+        <% posts.forEach(function(post){ %>
+
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="https://cdn.vox-cdn.com/thumbor/MMqBsXeHplWY3RDCF65CH2WBtiM=/0x0:3000x2000/1200x675/filters:focal(1260x760:1740x1240)/cdn.vox-cdn.com/uploads/chorus_image/image/68937917/eatersea0916_space_needle_shutterstock_dibrova.0.0.0.0.jpg" class="img-fluid" alt="Seattle">
+          <div class="carousel-caption d-none d-md-block">
+            <h1><%=post.title%></h1>
+            <p id="content">  <%=post.content.substring(0, 100) + " ..."%>
+              <a href="/posts/<%=post._id%>">Read More</a></p>
+          </div>
+        </div>
+
+        <% }) %>
+
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
 
 <%- include("partials/footer"); -%>
