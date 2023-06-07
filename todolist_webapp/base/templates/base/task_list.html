@@ -1,3 +1,14 @@
+{% if request.user.is_authenticated %}
+<p>{{request.user}}</p>
+<!-- if user is an existing user, take them to home page with logout button -->
+<a href="{% url 'logout' %}">Logout</a>
+<!-- else if user is not authenticated, take them to login page -->
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+<hr />
+
 <h1>My To Do List</h1>
 <a href="{% url 'task-create' %}">Add Task</a>
 
