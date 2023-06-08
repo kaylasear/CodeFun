@@ -55,14 +55,14 @@ class TaskList(LoginRequiredMixin, ListView):
     context_object_name = 'tasks'
 
     # ensure that a user can only get their own data/tasks
-    def get_context_data(self, **kwargs: Any):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         # pull the tasks for that specific user
         context['tasks'] = context['tasks'].filter(user=self.request.user)
 
         # what is the count of uncomplete items
-        context['count'] = context['tasks'].filter(complete=False)
+        context['count'] = context['tasks'].filter(complete=False).count()
 
         # fetch the value of the search bar
         search_input = self.request.GET.get('search-area') or ''
