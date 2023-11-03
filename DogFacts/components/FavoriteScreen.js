@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text, FlatList } from "react-native";
 
 export class FavoriteScreen extends React.Component {
   constructor(props) {
@@ -8,22 +8,23 @@ export class FavoriteScreen extends React.Component {
       favorites: [],
     };
     this.addFavorite = this.addFavorite.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
   }
-  // componentDidMount() {
-  //   this.addFavorite = this.addFavorite.bind(this);
-  // }
 
-  addFavorite = () => {
-    this.setState((prevState) => ({
-      favorites: [...prevState.favorites, prevState.fact],
-    }));
-    //this.setState({ favorites: [...this.state.favorites, this.state.fact] });
-    // let { favorites } = this.state;
-    // favorites.push(fact);
-    // this.setState({ favorites: favorites });
-    console.log(this.state.favorites);
-  };
+  componentDidMount() {
+    const favs = this.getFavorites();
+    this.setState({ favorites: favs });
+  }
 
+  getFavorites() {
+    return this.state.favorites;
+  }
+
+  addFavorite(fact) {
+    let favs = this.getFavorites();
+    favs.push(fact);
+    this.setState({ favorites: favs });
+  }
   render() {
     if (this.state.favorites.length === 0) {
       return (
@@ -32,11 +33,15 @@ export class FavoriteScreen extends React.Component {
         </View>
       );
     } else {
+      const favs = this.getFavorites();
+      favs.map((fav, i) => ({
+        key: `${i}`,
+        text: fav,
+      }));
+      console.log(favs);
       return (
-        <View>
-          {this.state.favorites.map((factItem, index) => {
-            return <Text key={index}>{factItem}</Text>;
-          })}
+        <View style={styles.container}>
+          <FlatList data={favs} numColumns={3} />
         </View>
       );
     }

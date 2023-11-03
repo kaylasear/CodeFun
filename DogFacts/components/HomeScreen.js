@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   StatusBar,
@@ -6,6 +6,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import FavoriteScreen from "./FavoriteScreen";
@@ -14,26 +15,26 @@ export class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     favorites = new FavoriteScreen();
+    this.state = {
+      randomFactText: "",
+      isFavorite: false,
+    };
+    this.saveFact = this.saveFact.bind(this);
   }
 
   static navigationOptions = {
     title: "Paws Facts",
   };
-  state = {
-    randomFactText: "",
-    isLoading: true,
-    isFavorite: false,
-  };
 
   onPressClickMe() {
-    this.setState({ randomFactText: "", isLoading: true });
+    this.setState({ randomFactText: "" });
 
     return fetch("https://dogapi.dog/api/v2/facts")
       .then((res) => res.json())
       .then((res) =>
         this.setState({
           randomFactText: res.data[0].attributes.body,
-          isLoading: false,
+          isFavorite: false,
         })
       )
       .catch((err) => console.error(err));
@@ -41,16 +42,16 @@ export class HomeScreen extends React.Component {
 
   saveFact(fact) {
     this.setState({ isFavorite: true });
-    console.log(this.state.randomFactText, this.state.isFavorite);
     return favorites.addFavorite(fact);
-    //return this.props.saveFavorites();
   }
 
-  removeFact(fact) {
-    // this.props.removeFact(fact);
+  removeFact(event) {
     this.setState({ isFavorite: false });
     console.log("removing fact method " + this.state.isFavorite);
-    // return this.props.saveFavorites();
+  }
+
+  styleHeart() {
+    return this.state.isFavorite ? "heart" : "heart-outline";
   }
 
   render() {
@@ -63,7 +64,6 @@ export class HomeScreen extends React.Component {
             onPress={() => this.onPressClickMe()}
             title="Press me"
             accessibilityLabel="Click for a random dog fact"
-            loading={this.state.isLoading ? true : false}
           />
           <View style={styles.favoriteButton}>
             <TouchableOpacity
@@ -73,7 +73,7 @@ export class HomeScreen extends React.Component {
                   : this.saveFact(this.state.randomFactText)
               }
             >
-              <Icon size={40} name="heart-outline" type="ionicon" />
+              <Icon size={40} name={this.styleHeart()} type="ionicon" />
             </TouchableOpacity>
           </View>
         </View>
