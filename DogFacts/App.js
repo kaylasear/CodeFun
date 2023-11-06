@@ -1,19 +1,22 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React, { useState } from "react";
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, View } from "react-native";
+import { FavoriteProvider } from "./contexts/FavoriteContext";
 import MainTabNavigator from "./navigation/MainTabNavigator";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
+export const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <FavoriteProvider>
         <NavigationContainer>
           <MainTabNavigator />
         </NavigationContainer>
-      </View>
-    );
-  }
+      </FavoriteProvider>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

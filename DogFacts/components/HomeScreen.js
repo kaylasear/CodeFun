@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   StatusBar,
@@ -10,29 +10,39 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import FavoriteScreen from "./FavoriteScreen";
+import FavoriteContext, {
+  useFavoriteContext,
+} from "../contexts/FavoriteContext";
 
-export class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    favorites = new FavoriteScreen();
-    this.state = {
-      randomFactText: "",
-      isFavorite: false,
-    };
-    this.saveFact = this.saveFact.bind(this);
-  }
+// export class HomeScreen extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       randomFactText: "",
+//       isFavorite: false,
+//     };
 
-  static navigationOptions = {
-    title: "Paws Facts",
-  };
+//     this.saveFact = this.saveFact.bind(this);
+//   }
 
-  onPressClickMe() {
-    this.setState({ randomFactText: "" });
+//   static navigationOptions = {
+//     title: "Paws Facts",
+//   };
+
+function HomeScreen() {
+  const { favorites, addFavorite } = useFavoriteContext();
+  const [state, setState] = useState({
+    isFavorite: false,
+    randomFactText: "",
+  });
+
+  function onPressClickMe() {
+    setState({ randomFactText: "" });
 
     return fetch("https://dogapi.dog/api/v2/facts")
       .then((res) => res.json())
       .then((res) =>
-        this.setState({
+        setState({
           randomFactText: res.data[0].attributes.body,
           isFavorite: false,
         })
@@ -40,47 +50,45 @@ export class HomeScreen extends React.Component {
       .catch((err) => console.error(err));
   }
 
-  saveFact(fact) {
-    this.setState({ isFavorite: true });
-    return favorites.addFavorite(fact);
+  function saveFact(fact) {
+    setState({ randomFactText: fact, isFavorite: true });
+    addFavorite(fact);
   }
 
-  removeFact(event) {
-    this.setState({ isFavorite: false });
-    console.log("removing fact method " + this.state.isFavorite);
+  function removeFact(fact) {
+    setState({ randomFactText: fact, isFavorite: false });
+    console.log("removing fact " + state.randomFactText);
   }
 
-  styleHeart() {
-    return this.state.isFavorite ? "heart" : "heart-outline";
+  function styleHeart() {
+    return state.isFavorite ? "heart" : "heart-outline";
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.bodyText}>{this.state.randomFactText}</Text>
-        <View style={styles.buttonContainer}>
-          <Button
-            buttonStyle={styles.button}
-            onPress={() => this.onPressClickMe()}
-            title="Press me"
-            accessibilityLabel="Click for a random dog fact"
-          />
-          <View style={styles.favoriteButton}>
-            <TouchableOpacity
-              onPress={() =>
-                this.state.isFavorite
-                  ? this.removeFact(this.state.randomFactText)
-                  : this.saveFact(this.state.randomFactText)
-              }
-            >
-              <Icon size={40} name={this.styleHeart()} type="ionicon" />
-            </TouchableOpacity>
-          </View>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.bodyText}>{state.randomFactText}</Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          buttonStyle={styles.button}
+          onPress={onPressClickMe}
+          title="Press me"
+          accessibilityLabel="Click for a random dog fact"
+        />
+        <View style={styles.favoriteButton}>
+          <TouchableOpacity
+            onPress={() =>
+              state.isFavorite
+                ? removeFact(state.randomFactText)
+                : saveFact(state.randomFactText)
+            }
+          >
+            <Icon size={40} name={styleHeart()} type="ionicon" />
+          </TouchableOpacity>
         </View>
-        <StatusBar style="auto" />
       </View>
-    );
-  }
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 export default HomeScreen;

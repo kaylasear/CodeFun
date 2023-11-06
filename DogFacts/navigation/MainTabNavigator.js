@@ -1,12 +1,13 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../components/HomeScreen";
 import AboutScreen from "../components/AboutScreen";
 import FavoriteScreen from "../components/FavoriteScreen";
+import { FavoriteContext } from "../contexts/FavoriteContext";
 
-const Tab = createBottomTabNavigator();
+export const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function MainTabNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Paws Facts" component={HomeScreen} />
@@ -16,4 +17,4 @@ function MyTabs() {
   );
 }
 
-export default MyTabs;
+export default MainTabNavigator;

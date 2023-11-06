@@ -1,50 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
+import { useFavoriteContext } from "../contexts/FavoriteContext";
 
-export class FavoriteScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      favorites: [],
-    };
-    this.addFavorite = this.addFavorite.bind(this);
-    this.getFavorites = this.getFavorites.bind(this);
-  }
+function FavoriteScreen() {
+  const { favorites } = useFavoriteContext();
 
-  componentDidMount() {
-    const favs = this.getFavorites();
-    this.setState({ favorites: favs });
-  }
-
-  getFavorites() {
-    return this.state.favorites;
-  }
-
-  addFavorite(fact) {
-    let favs = this.getFavorites();
-    favs.push(fact);
-    this.setState({ favorites: favs });
-  }
-  render() {
-    if (this.state.favorites.length === 0) {
-      return (
-        <View style={styles.container}>
-          <Text>You have no favorite facts yet</Text>
-        </View>
-      );
-    } else {
-      const favs = this.getFavorites();
-      favs.map((fav, i) => ({
-        key: `${i}`,
-        text: fav,
-      }));
-      console.log(favs);
-      return (
-        <View style={styles.container}>
-          <FlatList data={favs} numColumns={3} />
-        </View>
-      );
-    }
+  if (favorites.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text>You have no favorite facts yet</Text>
+      </View>
+    );
+  } else {
+    console.log("favorites: " + favorites);
+    return (
+      <View style={styles.container}>
+        {favorites?.map((item, id) => (
+          <Text key={id}>{item}</Text>
+        ))}
+      </View>
+    );
   }
 }
 
