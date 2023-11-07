@@ -1,9 +1,8 @@
-import React, { createContext, useContext } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../components/HomeScreen";
 import AboutScreen from "../components/AboutScreen";
 import FavoriteScreen from "../components/FavoriteScreen";
-import { FavoriteContext } from "../contexts/FavoriteContext";
 
 export const Tab = createBottomTabNavigator();
 

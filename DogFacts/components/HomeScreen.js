@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   StatusBar,
@@ -6,31 +6,12 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Platform,
 } from "react-native";
 import { Icon } from "react-native-elements";
-import FavoriteScreen from "./FavoriteScreen";
-import FavoriteContext, {
-  useFavoriteContext,
-} from "../contexts/FavoriteContext";
-
-// export class HomeScreen extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       randomFactText: "",
-//       isFavorite: false,
-//     };
-
-//     this.saveFact = this.saveFact.bind(this);
-//   }
-
-//   static navigationOptions = {
-//     title: "Paws Facts",
-//   };
+import { useFavoriteContext } from "../contexts/FavoriteContext";
 
 function HomeScreen() {
-  const { favorites, addFavorite } = useFavoriteContext();
+  const { favorites, addFavorite, deleteFavorite } = useFavoriteContext();
   const [state, setState] = useState({
     isFavorite: false,
     randomFactText: "",
@@ -56,8 +37,11 @@ function HomeScreen() {
   }
 
   function removeFact(fact) {
+    let factId = favorites.findIndex((fav) => fav === fact);
+    if (factId) {
+      deleteFavorite(factId);
+    }
     setState({ randomFactText: fact, isFavorite: false });
-    console.log("removing fact " + state.randomFactText);
   }
 
   function styleHeart() {

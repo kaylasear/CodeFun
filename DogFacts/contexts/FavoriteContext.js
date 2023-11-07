@@ -10,11 +10,19 @@ export const FavoriteProvider = ({ children }) => {
   const addFavorite = (favorite) =>
     setFavorites((prevState) => [...prevState, favorite]);
 
+  const deleteFavorite = (id) =>
+    setFavorites((prevState) => {
+      return prevState.filter((favorite, index) => {
+        return id !== index;
+      });
+    });
+
   return (
     <FavoriteContextProvider
       value={{
         favorites,
         addFavorite,
+        deleteFavorite,
       }}
     >
       {children}
