@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text, FlatList, Button } from "react-native";
 import { useFavoriteContext } from "../contexts/FavoriteContext";
 import { Swipeable } from "react-native-gesture-handler";
@@ -46,8 +46,7 @@ function FavoriteScreen() {
           data={favorites}
           renderItem={(v) =>
             _renderItem(v, () => {
-              console.log("pressed", v);
-              console.log(favorites);
+              deleteFavorite(v.index);
             })
           }
           ItemSeparatorComponent={myItemSeparator}
