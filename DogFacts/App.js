@@ -3,16 +3,19 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { FavoriteProvider } from "./contexts/FavoriteContext";
 import MainTabNavigator from "./navigation/MainTabNavigator";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <FavoriteProvider>
-        <NavigationContainer>
-          <MainTabNavigator />
-        </NavigationContainer>
-      </FavoriteProvider>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <FavoriteProvider>
+          <NavigationContainer>
+            <MainTabNavigator />
+          </NavigationContainer>
+        </FavoriteProvider>
+      </View>
+    </GestureHandlerRootView>
   );
 }
 

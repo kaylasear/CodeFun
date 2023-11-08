@@ -1,12 +1,29 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Text, FlatList, Button } from "react-native";
 import { useFavoriteContext } from "../contexts/FavoriteContext";
-import { ScrollView } from "react-native-gesture-handler";
+import { Swipeable } from "react-native-gesture-handler";
 
 function FavoriteScreen() {
-  const { favorites } = useFavoriteContext();
+  const { favorites, deleteFavorite } = useFavoriteContext();
 
-  _renderItem = ({ item }) => <Text style={styles.bodyText}>{item}</Text>;
+  _renderItem = ({ item, index }, onClick) => {
+    const renderRightActions = (progress, dragX, onClick) => {
+      return (
+        <View style={styles.deleteButton}>
+          <Button color="red" onPress={onClick} title="Delete"></Button>
+        </View>
+      );
+    };
+    return (
+      <Swipeable
+        renderRightActions={(progress, dragX) =>
+          renderRightActions(progress, dragX, onClick)
+        }
+      >
+        <Text style={styles.bodyText}>{item}</Text>
+      </Swipeable>
+    );
+  };
 
   const myItemSeparator = () => {
     return (
@@ -27,7 +44,12 @@ function FavoriteScreen() {
       <View style={styles.container}>
         <FlatList
           data={favorites}
-          renderItem={this._renderItem}
+          renderItem={(v) =>
+            _renderItem(v, () => {
+              console.log("pressed", v);
+              console.log(favorites);
+            })
+          }
           ItemSeparatorComponent={myItemSeparator}
         />
       </View>
@@ -43,6 +65,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  deleteButton: {
+    margin: 0,
+    alignContent: "center",
+    justifyContent: "center",
+    width: 70,
   },
   titleText: {
     padding: 10,
