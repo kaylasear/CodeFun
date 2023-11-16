@@ -2,7 +2,6 @@
 Paw Facts displays a random dog fact to your device at a push of a button. You can also save your favorite facts and read them through your favorites tab. 
 
 ## Features
-- There are three different tabs: Homescreen, Favorites, About
 - Homescreen Tab:
   - A new dog fact appears whenever the "Press Me" button is pressed
   - Pressing the heart button saves the dog fact to the favorites section
