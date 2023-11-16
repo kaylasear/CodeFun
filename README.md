@@ -1,3 +1,5 @@
+A collection of side projects that I've done to build on my programming skills.
+
 ## Blog Post Web App
 A web application for users to create and read blog posts. 
 - Tech Stack
