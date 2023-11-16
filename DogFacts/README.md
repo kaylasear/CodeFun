@@ -23,3 +23,4 @@ Paw Facts displays a random dog fact to your device at a push of a button. You c
 - [Dog Facts API](https://dogapi.dog/docs/api-v2)
   
 ## About 
+Paws Facts is my first React Native mobile app. I own the sweetest and ditziest Golden Retriever and so I wanted to create something about dogs!
