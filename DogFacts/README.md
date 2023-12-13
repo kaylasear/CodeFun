@@ -13,6 +13,18 @@ Paw Facts displays a random dog fact to your device at a push of a button. You c
   - History and introduction of the application
   
 ## Screenshots
+Homescreen
+
+![The home screen on an iPhone XS](./assets/fact.jpg)
+
+Favorite Fact Liked
+![The favorite fact being liked](./assets/liked-fact.jpg)
+
+Favorites Screen
+![The favorites screen on an iPhone XS](./assets/favorites.jpg)
+
+Deleting Favorite Fact
+![Deleting a fact on the favorites screen](./assets/delete-favorite.jpg)
 
 ## Tech Stack
 - [React Native](https://reactnative.dev/)
