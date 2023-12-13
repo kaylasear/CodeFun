@@ -17,6 +17,15 @@ function MainTabNavigator() {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="dog" color={color} size={size} />
           ),
+          headerStyle: {
+            backgroundColor: "#D2E0FB",
+          },
+          headerTitleStyle: {
+            fontSize: 25,
+          },
+          tabBarStyle: {
+            backgroundColor: "#D2E0FB",
+          },
         }}
       />
       <Tab.Screen
@@ -26,6 +35,15 @@ function MainTabNavigator() {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="list" color={color} size={size} />
           ),
+          tabBarStyle: {
+            backgroundColor: "#D2E0FB",
+          },
+          headerStyle: {
+            backgroundColor: "#D2E0FB",
+          },
+          headerTitleStyle: {
+            fontSize: 25,
+          },
         }}
       />
       <Tab.Screen
@@ -39,6 +57,15 @@ function MainTabNavigator() {
               size={size}
             />
           ),
+          tabBarStyle: {
+            backgroundColor: "#D2E0FB",
+          },
+          headerStyle: {
+            backgroundColor: "#D2E0FB",
+          },
+          headerTitleStyle: {
+            fontSize: 25,
+          },
         }}
       />
     </Tab.Navigator>
