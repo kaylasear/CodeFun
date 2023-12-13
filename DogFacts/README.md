@@ -14,16 +14,21 @@ Paw Facts displays a random dog fact to your device at a push of a button. You c
   
 ## Screenshots
 Homescreen
-
+<br>
 ![The home screen on an iPhone XS](./assets/fact.jpg)
+<br>
 
 Favorite Fact Liked
+<br>
 ![The favorite fact being liked](./assets/liked-fact.jpg)
 
+
 Favorites Screen
+<br>
 ![The favorites screen on an iPhone XS](./assets/favorites.jpg)
 
 Deleting Favorite Fact
+<br>
 ![Deleting a fact on the favorites screen](./assets/delete-favorite.jpg)
 
 ## Tech Stack
